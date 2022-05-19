@@ -6,6 +6,7 @@ use App\Http\Controllers\ServantController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CourseController;
+use App\Http\ControlExperienceController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -44,11 +45,16 @@ Route::put('/updateCompany/{id}' , [CompanyController::class , 'updateCompany'])
 ////////////////////////////////////////////////////course/////////////////////////////////////
 
 Route::get('/courses' , [CourseController::class , 'getCourse']);
-Route::get('/courses/{id}' , [CourseController::class , 'getCourseById']);
+Route::get('/course/{id}' , [CourseController::class , 'getCourseById']);
 Route::delete('/deleteCourse/{id}' , [CourseController::class , 'deleteCourse']);
 Route::put('/updateCourse/{id}' , [CourseController::class , 'updateCourse']);
 
-////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////experience
 
+
+Route::get('/experience' , [ExperienceController::class , 'getExperience']);
+Route::get('/experience/{id}' , [ExperienceController::class , 'getExperienceById']);
+Route::delete('/deleteExperience/{id}' , [ExperienceController::class , 'deleteExperience']);
+Route::put('/updateExperience/{id}' , [ExperienceController::class , 'updateExperience']);
 
 
