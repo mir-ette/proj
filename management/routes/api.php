@@ -17,5 +17,12 @@ use App\Http\Controllers\ServantController;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+/////////////////////////////////////////servants///////////////////////
 Route::get('/servants' , [ServantController::class , 'getServant']);
 Route::get('/servant/{id}' , [ServantController::class , 'getServantById']);
+Route::post('/addServant' , [ServantController::class , 'addServant']);
+Route::delete('/deleteServant/{id}' , [ServantController::class , 'deleteServant']);
+Route::put('/updateServant/{id}' , [ServantController::class , 'updateServant']);
+/////////////////////////////////////////////////////////////////////
+
+

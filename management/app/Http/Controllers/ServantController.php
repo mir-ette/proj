@@ -44,11 +44,17 @@ class ServantController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
-
+    // public function store(Request $request)
+    // {
+    //     //
+    // }
+ public function addServant(Request $request)
+   {
+ 
+     $servant = Servant::create($request->all());
+      return response($servant,201);
+ 
+   }
     /**
      * Display the specified resource.
      *
@@ -78,19 +84,39 @@ class ServantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    // public function update(Request $request, $id)
+    // {
+    //     //
+    // }
+    public function updateServant(Request $request,$id)
     {
-        //
+  
+      $servant = Servant::find($id);
+      if(is_null($servant)){
+        return response()->json(['message'=>'Servant Not Found'],404);
+      }
+      $servant->update($request->all());
+      return response($servant,200);
     }
-
+  
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    // public function destroy($id)
+    // {
+    //     //
+    // }
+    public function deleteServant(Request $request,$id)
+    {   
+       $servant = Servant::find($id);
+       if(is_null($servant)){
+        return response()->json(['message'=>'Servant Not Found'],404);
     }
+  
+    $servant->delete();
+    return response()->json(null,204);
+  }
 }
