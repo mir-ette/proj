@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facedes\Hash;
 use App\Models\Servant;
 class ServantController extends Controller
 {
@@ -119,4 +120,42 @@ class ServantController extends Controller
     $servant->delete();
     return response()->json(null,204);
   }
+  /////////////////////////////////register
+
+
+
+  public function register(Request $request)
+  {
+      $servant = Servant ::where('email',$request['email'])->first();
+      if($servant)
+          
+    {  
+      $response['status']=0;
+      $response['message']='email already exists';
+      $response['code']=409;
+     }
+     //if not exists 
+      else{
+          $servant = Servant ::create([
+              'name' =>$request-> name,
+              'email'=>$request-> email,
+              'password'=>bcrypt($request->password),
+              'national_id'=>$request-> national_id,
+              'wsp'=>$request->wsp,
+              'phone_no'=>$request->phone_no,
+              'church_name'=>$request->church_name,
+              //'street'=>$request->street,
+              'role'=>$request->role
+             
+          ]);
+  
+          $response['status']=1;
+          $response['message']='done';
+          $response['code']=200;
+      }
+     
+      return response()->json($response);
+      
+  }
+
 }

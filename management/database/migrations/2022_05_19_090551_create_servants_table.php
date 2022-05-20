@@ -19,7 +19,10 @@ class CreateServantsTable extends Migration
             $table->integer('national_id');
             $table->integer('wsp');
             $table->string('phone_no');
-            $table->string('email');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->rememberToken();
             $table->string('role');
             $table->string('church_name');  
             $table->timestamps();

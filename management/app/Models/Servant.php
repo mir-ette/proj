@@ -15,9 +15,14 @@ class Servant extends Model
         'wsp',
         'phone_no',
         'email',
+        'password',
         'role',
         'church_name',
        
+    ];
+    protected $hidden = [
+        'password',
+        'remember_token',
     ];
     public function  applications() {
         return $this->hasMany( Application::class);

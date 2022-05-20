@@ -29,6 +29,8 @@ Route::delete('/deleteServant/{id}' , [ServantController::class , 'deleteServant
 Route::put('/updateServant/{id}' , [ServantController::class , 'updateServant']);
 
 
+Route::post('/register' , [ServantController::class , 'register']);
+
 ///////////////////////////////////applications//////////////////////////////////
 Route::get('/applications' , [ApplicationController::class , 'getApplication']);
 Route::get('/application/{id}' , [ApplicationController::class , 'getApplicationById']);
