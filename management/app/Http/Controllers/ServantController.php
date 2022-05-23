@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facedes\Hash;
 use App\Models\Servant;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
+use Tymon\JWTAuth\Exceptions\UserNotDefinedException;
+use Tymon\JWTAuth\Facades\JWTAuth;
+use Illuminate\Support\Facedes\Auth;
 class ServantController extends Controller
 {
     /**
@@ -157,5 +162,64 @@ class ServantController extends Controller
       return response()->json($response);
       
   }
+  /////////////////////////////////////////////////login
+
+  public function login(Request $request)
+  {
+   $credentials = $request->only('email','password');
+      try{
+          // if email & pass incoreect
+          if(!JWTAuth::attempt($credentials))
+     
+          {
+              $response['status']=0;
+              $response['code']=401;
+              $response['data']=null;
+              $response['message']='email or password is incorrect';
+              return response()->json($response);
+          }
+
+
+      } catch(JWTExceptions $e){
+          $response['data']=null;
+          $response['code']=500;
+          $response['message']='could Not create Token';
+          return response()->json($response);
+      }
+
+
+      
+  //    if email & pass successfully
+      $servant = auth()->servant();
+      $data['token']=auth()->claims([
+          'national_id' => $servant->national_id,               // 
+          'servant_id' => $servant-> id,
+          'wsp' => $servant-> wsp,
+          'phone_no' => $servant-> phone_no,
+          'email' => $servant-> email,
+          'role'=>$servant-> role,
+          'church_name'=>$servant-> church_name
+      // $servant = auth()->user();
+      // $data['token']=auth()->claims([
+      //             // 
+      //     'user_id' => $servant-> id,
+      //     'email' => $servant-> email,
+      //     'role'=>$servant-> role
+      ])->attempt($credentials);
+
+      $response['data']= $data;
+      $response['status']=1;
+      $response['code']=200;
+      $response['message']='login successfully';
+      return response()->json($response);
+  }
+
+
+
+
+
+
+
+
 
 }

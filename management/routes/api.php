@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ServantController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CourseController;
@@ -29,7 +29,8 @@ Route::delete('/deleteServant/{id}' , [ServantController::class , 'deleteServant
 Route::put('/updateServant/{id}' , [ServantController::class , 'updateServant']);
 
 
-Route::post('/register' , [ServantController::class , 'register']);
+Route::post('/login' , [UserController::class , 'login']);
+Route::post('/register' , [UserController::class , 'register']);
 
 ///////////////////////////////////applications//////////////////////////////////
 Route::get('/applications' , [ApplicationController::class , 'getApplication']);

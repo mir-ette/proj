@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Servant;
+use App\Models\User;
 class Company extends Model
 {
     use HasFactory;
@@ -18,9 +18,9 @@ class Company extends Model
         'phone_no',
         'post_date',
         'servant_dealer',
-        'servant_id',
+        'user_id',
     ];
-    public function servant() { 
-        return $this->belongsTo(Servant::class);
+    public function user() { 
+        return $this->belongsTo(User::class);
        }
 }

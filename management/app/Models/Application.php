@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Company;
-use App\Models\Servant;
+use App\Models\User;
 class Application extends Model
 {
     use HasFactory;
@@ -23,12 +23,12 @@ class Application extends Model
         'where to post',
         'commission',
         'code',
-        'servant_id',
+        'user_id',
         'comp_id'
 
     ];
-    public function servant() { 
-        return $this->belongsTo(Servant::class);
+    public function user() { 
+        return $this->belongsTo(User::class);
        }
        public function company() { 
         return $this->belongsTo(Company::class);
