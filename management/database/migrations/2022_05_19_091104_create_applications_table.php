@@ -29,8 +29,8 @@ class CreateApplicationsTable extends Migration
             $table->date('create_at');
             $table->unsignedBigInteger('comp_id');
             $table->foreign('comp_id')->references('id')->on('companies')->onDelete('cascade');
-            $table->unsignedBigInteger('servant_id');
-            $table->foreign('servant_id')->references('id')->on('servants')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

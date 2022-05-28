@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use App\Models\Application;
 use App\Models\Company;
+use App\Models\Employee;
 class User extends Authenticatable  implements JWTSubject
 {
     use HasFactory, Notifiable;
@@ -76,4 +77,11 @@ class User extends Authenticatable  implements JWTSubject
     {
         return [];
     }
+    public function  employees() {
+        
+        return $this->belongsToMany( Employee::class, 'employee_user')->withPivot('dealings');
+}
+
+
+
 }
